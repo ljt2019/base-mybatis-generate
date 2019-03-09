@@ -1,0 +1,38 @@
+package ${servicePackage}.impl;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+
+import ${daoPackage}.${domainName}Mapper;
+import ${modelPackage}.${domainName};
+import ${modelPackage}.${domainName}Example;
+import ${servicePackage}.${domainName}Service;
+import ${basePackage}.IBaseMapper;
+import ${basePackage}.BaseServiceImpl;
+
+import java.util.List;
+import ${baseQueryPackage}.Query;
+import ${basePackage}.PageParameter;
+
+@Service
+@Transactional
+public class ${domainName}ServiceImpl extends BaseServiceImpl<${domainName}, ${domainName}Example> implements ${domainName}Service {
+
+    @Autowired
+	private ${domainName}Mapper baseMapper;
+
+
+
+	@Override
+	public IBaseMapper<${domainName}, ${domainName}Example> getBaseMapper() {
+		return baseMapper;
+	}
+
+	@Override
+    public List<${domainName}> query(Query query, PageParameter pageParameter) {
+    	return baseMapper.query(query,pageParameter);
+    }
+}

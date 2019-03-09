@@ -1,0 +1,14 @@
+package ${modelPackage};
+
+
+import ${baseQueryPackage}.Property;
+
+
+public class ${domainName}_{
+
+#foreach ($property in $propertys)
+    public static final Property ${property.get("propertyName")} =new Property("${property.get("column")}");
+
+#end
+
+}

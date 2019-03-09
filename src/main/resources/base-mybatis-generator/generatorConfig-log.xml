@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!--【[\u4e00-\u9fa5]】中文正则替换-->
+    <context id="context1" targetRuntime="MyBatis3">
+
+        <!-- 批量替换 【com.tiger.rabbitmq】，与项目包名对应 -->
+
+        <!-- 1、自定义插件 -->
+        <plugin
+                type="com.tiger.rabbitmq.mybatis.genrator.LifeHallPlugin">
+            <!-- TODO service层 生成目录 -->
+            <property name="servicePackage"
+                      value="com.tiger.rabbitmq.service"/>
+            <property name="targetProject"
+                      value="C:\AAAAA\base-mybatis-generator-out\src\main\java"/>
+        </plugin>
+
+        <!-- 2、生成器类 -->
+        <commentGenerator
+                type="com.tiger.rabbitmq.mybatis.genrator.LifeHallCommentGenerator">
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 3、数据源 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/rabbitmq?useSSL=true"
+                        userId="root" password="123456"/>
+
+        <!-- 4、TODO Model层 生成目录 -->
+        <javaModelGenerator
+                targetPackage="com.tiger.rabbitmq.entity"
+                targetProject="C:\AAAAA\base-mybatis-generator-out\src\main\java">
+            <!-- 实体类默认继承父类 -->
+            <property name="rootClass"
+                      value="com.tiger.rabbitmq.mybatis.base.EntityBase"></property>
+        </javaModelGenerator>
+
+        <!-- 5、TODO dao、mapper 生成目录 -->
+        <sqlMapGenerator
+                targetPackage="com.tiger.rabbitmq.dao.mapper"
+                targetProject="C:\AAAAA\base-mybatis-generator-out\src\main\java"/>
+        <javaClientGenerator
+                targetPackage="com.tiger.rabbitmq.dao"
+                targetProject="C:\AAAAA\base-mybatis-generator-out\src\main\java" type="XMLMAPPER"/>
+
+
+        <table tableName="order_info" domainObjectName="OrderInfo" alias="_info">
+            <generatedKey column="id" sqlStatement="SELECT REPLACE(UUID(), '-', '')"></generatedKey>
+            <columnOverride column="id" property="id"></columnOverride>
+            <columnOverride column="message_id" property="messageId"></columnOverride>
+            <columnOverride column="name" property="name"></columnOverride>
+            <columnOverride column="state" property="state"></columnOverride>
+            <columnOverride column="create_date" property="createDate"></columnOverride>
+            <columnOverride column="update_date" property="updateDate"></columnOverride>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
